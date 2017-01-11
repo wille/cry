@@ -18,6 +18,6 @@ func main() {
 	startWalk := common.GetHomeDir()
 
 	common.Walk(startWalk, func(filePath string, fileInfo os.FileInfo) {
-		fmt.Println(filePath)
+		fmt.Println("encrypting", filePath)
 	})
 }
