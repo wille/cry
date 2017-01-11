@@ -1,11 +1,11 @@
 // +build !windows
 
-package main
+package common
 
 import (
 	"os"
 )
 
-func getHomeDir() string {
+func GetHomeDir() string {
 	return os.Getenv("HOME")
 }

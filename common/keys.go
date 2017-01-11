@@ -12,7 +12,7 @@ const (
 	Bits int = 1024
 )
 
-// Generate new keypair
+// Generate new RSA keypair
 func Generate() *rsa.PrivateKey {
 	priv, err := rsa.GenerateKey(rand.Reader, Bits)
 

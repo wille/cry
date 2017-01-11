@@ -1,10 +1,10 @@
-package main
+package common
 
 import (
 	"os"
 )
 
-func getHomeDir() string {
+func GetHomeDir() string {
 	home := os.Getenv("HOMEDRIVE") + os.Getenv("HOMEPATH")
 
 	if home == "" {

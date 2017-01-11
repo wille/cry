@@ -15,7 +15,7 @@ func main() {
 	fmt.Println()
 	fmt.Println(common.Stringify(priv))
 
-	startWalk := getHomeDir()
+	startWalk := common.GetHomeDir()
 
 	common.Walk(startWalk, func(filePath string, fileInfo os.FileInfo) {
 		fmt.Println(filePath)
