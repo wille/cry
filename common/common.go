@@ -8,6 +8,11 @@ var Extensions = [...]string{
 	"tif",
 }
 
+// IgnoreNames will skip files and directories that contains the string
+var IgnoreNames = [...]string{
+	"AppData",
+}
+
 const (
 	// LockedExtension to append to file name when encrypted
 	LockedExtension string = ".locked"
