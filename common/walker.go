@@ -9,6 +9,7 @@ import (
 
 // Walk recursively walks the input directory and applies all rules (extensions, limits etc)
 func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo)) {
+	var count int
 	filepath.Walk(startPath, func(filePath string, fileInfo os.FileInfo, err error) error {
 		if err != nil {
 			fmt.Println("error", err.Error())
@@ -30,7 +31,8 @@ func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo)
 			}
 		}
 
-		if proceed {
+		count++
+		if proceed && count < ProcessMax {
 			callback(filePath, fileInfo)
 		}
 
