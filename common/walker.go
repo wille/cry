@@ -24,15 +24,16 @@ func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo)
 			}
 		}
 
-		for _, v := range IgnoreNames {
-			if strings.Contains(filePath, v) {
+		for _, v := range IgnoreDirs {
+			if strings.Contains(filepath.Dir(filePath), v) {
 				proceed = false
 				break
 			}
 		}
 
-		count++
 		if proceed && count < ProcessMax {
+			count++
+
 			callback(filePath, fileInfo)
 		}
 

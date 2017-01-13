@@ -8,9 +8,10 @@ var Extensions = [...]string{
 	"tif",
 }
 
-// IgnoreNames will skip files and directories that contains the string
-var IgnoreNames = [...]string{
+// IgnoreDirs will skip directories that contains the string
+var IgnoreDirs = [...]string{
 	"AppData",
+	".",
 }
 
 const (
