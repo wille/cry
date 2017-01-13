@@ -1,4 +1,4 @@
-package common
+package main
 
 // Extensions to encrypt
 var Extensions = [...]string{

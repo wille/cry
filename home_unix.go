@@ -1,6 +1,6 @@
 // +build !windows
 
-package common
+package main
 
 import (
 	"os"

