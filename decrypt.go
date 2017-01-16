@@ -5,7 +5,6 @@ import (
 	"crypto/cipher"
 	"crypto/rand"
 	"crypto/rsa"
-	"fmt"
 	"io/ioutil"
 
 	"crypto/sha256"
@@ -22,8 +21,6 @@ func decrypt(file string, priv *rsa.PrivateKey) {
 
 	header := data[:EncryptedHeaderSize]
 	label := []byte("")
-
-	fmt.Println(header)
 
 	header, err = rsa.DecryptOAEP(sha256.New(), rand.Reader, priv, header, label)
 

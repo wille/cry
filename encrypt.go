@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/rsa"
-	"fmt"
 	"io/ioutil"
 
 	"crypto/aes"
@@ -31,7 +30,6 @@ func encrypt(file string, priv *rsa.PrivateKey) {
 
 	label := []byte("")
 	header, err = rsa.EncryptOAEP(sha256.New(), rand.Reader, &pub, header, label)
-	fmt.Println(header)
 
 	if err != nil {
 		panic(err)
