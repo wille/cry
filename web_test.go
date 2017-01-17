@@ -2,20 +2,18 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 	"testing"
 )
 
-const Endpoint = "http://localhost:1312/upload"
-
 func TestWeb(t *testing.T) {
+	fmt.Println("Generating key...")
+
 	priv := Generate()
-	key := Stringify(priv)
+	str := Stringify(priv)
+	fmt.Println(str)
 
-	fmt.Println(key)
-
-	_, err := http.PostForm(Endpoint, url.Values{"k": {key}})
+	fmt.Println("Uploading...")
+	err := PostKey(priv)
 
 	if err != nil {
 		panic(err)
