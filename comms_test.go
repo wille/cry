@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestWeb(t *testing.T) {
+func TestComms(t *testing.T) {
 	fmt.Println("Generating key...")
 
 	priv := Generate()
@@ -20,4 +20,13 @@ func TestWeb(t *testing.T) {
 	}
 
 	fmt.Println("Key uploaded")
+
+	fmt.Println("Retrieving key...")
+	priv, err = GetKey()
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(Stringify(priv))
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/rsa"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -9,8 +10,32 @@ import (
 // PostKey sends the private key to the remote serrver
 func PostKey(priv *rsa.PrivateKey) error {
 	key := Stringify(priv)
+	id := "id"
 
-	_, err := http.PostForm(Endpoint, url.Values{"k": {key}})
+	_, err := http.PostForm(UploadEndpoint, url.Values{
+		"k": {key},
+		"i": {id},
+	})
 
 	return err
+}
+
+func GetKey() (*rsa.PrivateKey, error) {
+	id := "id"
+
+	req, err := http.PostForm(RetrieveEndpoint, url.Values{
+		"i": {id},
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	key := make([]byte, req.ContentLength)
+
+	io.ReadFull(req.Body, key)
+
+	priv, err := DecodeKey(key)
+
+	return priv, err
 }

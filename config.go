@@ -29,5 +29,7 @@ const (
 	EncryptedHeaderSize int = 128
 
 	// Endpoint web server URL
-	Endpoint = "http://localhost:1312/upload"
+	UploadEndpoint = "http://localhost:1312/upload"
+
+	RetrieveEndpoint = "http://localhost:1312/retrieve"
 )

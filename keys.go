@@ -34,3 +34,12 @@ func Stringify(priv *rsa.PrivateKey) string {
 
 	return string(pem.EncodeToMemory(&privateKeyBlock))
 }
+
+// DecodeKey
+func DecodeKey(key []byte) (*rsa.PrivateKey, error) {
+	block, _ := pem.Decode([]byte(key))
+
+	priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
+
+	return priv, err
+}
