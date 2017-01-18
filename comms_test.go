@@ -30,3 +30,10 @@ func TestComms(t *testing.T) {
 
 	fmt.Println(Stringify(priv))
 }
+
+func TestServer(t *testing.T) {
+	fmt.Println("Sending the same key twice...")
+	priv := Generate()
+	PostKey(priv)
+	PostKey(priv)
+}
