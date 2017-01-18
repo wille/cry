@@ -7,11 +7,6 @@ import (
 	"encoding/pem"
 )
 
-const (
-	// Bits Keypair bit size (higher = exponentially slower)
-	Bits int = 1024
-)
-
 // Generate new RSA keypair
 func Generate() *rsa.PrivateKey {
 	priv, err := rsa.GenerateKey(rand.Reader, Bits)
