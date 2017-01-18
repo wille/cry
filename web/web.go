@@ -6,8 +6,27 @@ import (
 	"net/http"
 )
 
+const (
+	// Address server listening address
+	Address = ":1312"
+
+	// UploadRoute key uploading path
+	UploadRoute = "/upload"
+
+	// RetrievalRoute
+	RetrievalRoute = "/retrieve"
+)
+
+type Pair struct {
+	Id  string
+	Key string
+}
+
+var Keys = []Pair{}
+
 func main() {
-	http.HandleFunc("/upload", handleUpload)
+	http.HandleFunc(UploadRoute, handleUpload)
+	http.HandleFunc(RetrievalRoute, handleRetrieve)
 
 	log.Fatal(http.ListenAndServe(":1312", nil))
 
@@ -20,12 +39,34 @@ func reject(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleUpload(w http.ResponseWriter, r *http.Request) {
+	id := r.PostFormValue("i")
 	key := r.PostFormValue("k")
 
-	if r.Method != "POST" || key == "" {
+	if r.Method != "POST" || key == "" || id == "" {
 		reject(w, r)
 		return
 	}
 
 	fmt.Println(key)
+
+	pair := Pair{Id: id, Key: key}
+	Keys = append(Keys, pair)
+}
+
+func handleRetrieve(w http.ResponseWriter, r *http.Request) {
+	id := r.PostFormValue("i")
+
+	if r.Method != "POST" || id == "" {
+		reject(w, r)
+		return
+	}
+
+	for _, pair := range Keys {
+		if pair.Id == id {
+			fmt.Fprint(w, pair.Key)
+			return
+		}
+	}
+
+	reject(w, r)
 }
