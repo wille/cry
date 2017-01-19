@@ -31,7 +31,7 @@ func main() {
 	http.HandleFunc(RetrievalRoute, handleRetrieve)
 
 	fmt.Println("Listening on", Address)
-	log.Fatal(http.ListenAndServe(":1312", nil))
+	log.Fatal(http.ListenAndServe(Address, nil))
 }
 
 func reject(w http.ResponseWriter, r *http.Request, reason string) {
