@@ -54,7 +54,9 @@ If modifying the RSA key size variable `Bits`, please see `EncryptedHeaderSize`.
 
 # This program does not
 
-- Demand any money from the user. It simply encrypts the amount of files specified in [config.go](config.go) constant `ProcessMax` and sends it to the server
+- Demand any money from the user. It simply encrypts the amount of files specified in [config.go](config.go) 
+constant `ProcessMax` and sends it to the server. Encrypt your files and store your encryption key on your 
+server.
 
 # Legal Warning
 
