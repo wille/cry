@@ -8,9 +8,8 @@ import (
 )
 
 // PostKey sends the private key to the remote serrver
-func PostKey(priv *rsa.PrivateKey) error {
+func PostKey(priv *rsa.PrivateKey, id string) error {
 	key := Stringify(priv)
-	id := "id"
 
 	_, err := http.PostForm(UploadEndpoint, url.Values{
 		"k": {key},
@@ -20,9 +19,7 @@ func PostKey(priv *rsa.PrivateKey) error {
 	return err
 }
 
-func GetKey() (*rsa.PrivateKey, error) {
-	id := "id"
-
+func GetKey(id string) (*rsa.PrivateKey, error) {
 	req, err := http.PostForm(RetrieveEndpoint, url.Values{
 		"i": {id},
 	})

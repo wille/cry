@@ -1,6 +1,6 @@
 package main
 
-// Extensions to encrypt
+// Extensions to walk
 var Extensions = [...]string{
 	"txt",
 	"doc",
