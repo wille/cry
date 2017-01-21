@@ -1,5 +1,7 @@
 # go-cry
 
+>some do not seem to understand that this is not even close to being complete, and manage to build a system that processes payments for this then you are probably able to write this on their own. I could say that this was a program that encrypts some of your files and stores it on a server and you would not bother
+
 This project was written to show how easy it is to create extremely malicious code.
 
 Ransomware is designed to take your most loved files hostage demanding large amounts of money to unlock them.
@@ -57,7 +59,3 @@ If modifying the RSA key size variable `Bits`, please see `EncryptedHeaderSize`.
 - Demand any money from the user. It simply encrypts the amount of files specified in [config.go](config.go) 
 constant `ProcessMax` and sends it to the server. Encrypt your files and store your encryption key on your 
 server.
-
-# Legal Warning
-
-go-cry may be used only for Educational Purposes. Do not use it as a ransomware! You could go to jail on obstruction of justice charges just for running hidden tear, even though you are innocent.
